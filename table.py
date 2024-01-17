@@ -1,7 +1,7 @@
 #Carlos Vitor Freitas Santos - 20230014111
 #Wesley Henrique da S. Vieira - 20230014390
 
-#Biblioteca para visualizar a tabela no terminal (pip install pandas)
+#Biblioteca apenas para visualizar a tabela no terminal (pip install pandas)
 import pandas as pd
 
 #Requesito 1 
@@ -21,23 +21,27 @@ def criarTabela():
 def addLinha(tabela):
     for key, valor in tabela.items():
         novo_item = input(f"Digite o novo item da coluna | {key}: ")
+        
         while True:
             if novo_item!="":
                 break
             else:
                 print("Inválido. Tente Novamente! ")
                 novo_item = input(f"Digite o novo item da coluna | {key}: ")
+
         valor.append(novo_item)
 
 #Requesito 3
 def delLinha(tabela):
     indice = int(input("Digite o indice que quer remover: "))
+
     for i in tabela.values():
         if indice<len(i):
             i.pop(indice)
-            print("Removido com sucesso!")
+            return("Removido com sucesso!")
+        
         else:
-            print("Inválido")
+            return("Inválido")
                 
 #Requesito 4
 def addColuna(tabela):
@@ -60,38 +64,95 @@ def delColuna(tabela):
 #Requesito 6
 def sumTable(tabela):
     soma = 0
+
     for i in tabela.values():
         for j in i:
             if type(j)==str:
                 pass
+
             else:
                 soma += int(j)
-    print (soma)
+
+    return soma
 
 #Requesito 7
 def mediaTable(tabela):
     soma = 0
     cont = 0
+
     for i in tabela.values():
         for j in i:
             if type(j)==str:
                 pass
+
             else:
                 soma += int(j)
                 cont += 1
-    print (soma/cont)
+
+    return soma/cont
 
 #Requesito 8
 def exibir_tabela(tabela):
-    print(tabela)
+    print(pd.DataFrame(tabela))
 
 #Requesito 9
 def openCSV():
-    return None   
+    nova_tabela = {}
+    colunas = ["Nome", "Dano Corpo", "Dano Cabeça"]
+
+    for coluna in colunas:
+        nova_tabela[coluna] = []
+
+    with open('valorantArmas.csv', 'r') as arqCsv:
+        arqCsv.readline()
+
+        for linha in arqCsv:
+            linhas = linha.strip().split(',')
+            
+            for i in range(len(colunas)):
+                nova_tabela[colunas[i]].append(linhas[i])
+
+    return pd.DataFrame(nova_tabela)
 
 #Requesito 10
-def filtarTable():
-    return None
 
+#Filtro 1
+def armaDano():
+    valor = int(input("Digite qual dano na cabeça você quer filtrar: "))
+    tab = openCSV()
+    cont = 0
+    for i in tab["Dano Cabeça"]:
+        if int(i) > valor:
+            nome = tab["Nome"][cont]
+            print(f"{nome}: {i}")
+        cont += 1
 
+#Filtro 2
+def primeiraLetra():
+    letra = str(input("Digite uma letra que vc quer filtrar: ")).upper()
+    while True:
+        if len(letra)>1:
+            print("DIGITE APENAS UMA LETRA. Tente Novamente! ")
+            letra = str(input("Digite uma letra que vc quer filtrar: ")).upper()
+        else:
+            tab = openCSV()
+            for i in tab["Nome"]:
+                if letra in i:
+                    print(i)
+            break
+
+def filtarTable(armaDano, primeiraLetra):
+    print('''O que você quer filtrar:
+          
+            [1] - Dano na Cabeça
+            [2] - Primeira Letra
+          ''')
+    
+    opc = int(input("Digite a opc: "))
+    print("\n")
+    
+    if opc==1:
+        return armaDano()
+    else:
+        return primeiraLetra()
 
