@@ -3,7 +3,8 @@
 
 from table import *
 
-#tabela = criarTabela()
+tabela = {'Nome': ['Wesley', 'Carlos'] , 'Idade':[20,20]}
+#exibir_tabela(tabela)
 #addLinha(tabela)
 #delLinha(tabela)
 #addColuna(tabela)
@@ -11,7 +12,7 @@ from table import *
 #exibir_tabela(tabela)
 #sumTable(tabela)
 #mediaTable(tabela)
-#openCSV()
-filtarTable(armaDano, primeiraLetra)
+openCSV()
+#filtarTable(armaDano, primeiraLetra)
 #armaDano()
 #primeiraLetra()

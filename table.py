@@ -5,20 +5,25 @@
 import pandas as pd
 
 #Requesito 1 
-def criarTabela():    
+def criarTabela():
+    print("\n-=CRIANDO TABELA=-\n")   
     tabela = {}
     nColunas = int(input("Número de colunas: "))
 
     for i in range (nColunas):
         nomeColuna = input("Nome da coluna: ")
+        
         linha = input("Digite as linhas separados por (;): ").split(';')
 
         tabela[nomeColuna] = linha
+
+    #global Nlinhas = len(linha)
 
     return tabela
 
 #Requesito 2 
 def addLinha(tabela):
+    print("\n-=ADICIONANDO NOVA LINHA=-\n")  
     for key, valor in tabela.items():
         novo_item = input(f"Digite o novo item da coluna | {key}: ")
         
@@ -30,39 +35,65 @@ def addLinha(tabela):
                 novo_item = input(f"Digite o novo item da coluna | {key}: ")
 
         valor.append(novo_item)
+        
+    exibir_tabela(tabela)
 
 #Requesito 3
 def delLinha(tabela):
+    print("\n-=DELETANDO LINHA=-\n")  
     indice = int(input("Digite o indice que quer remover: "))
+    cont_linha = list(tabela.values())
 
-    for i in tabela.values():
-        if indice<len(i):
-            i.pop(indice)
-            return("Removido com sucesso!")
-        
-        else:
-            return("Inválido")
+    #não deixar a tabela vazia
+    #item revomido/ sim ou não
+
+    while (indice >= len(cont_linha[0]) or indice < 0):
+        print("Erro, tamanho errado!!")
+        indice = int(input("Digite o indice que quer remover: "))
+
+    for j in tabela.values():
+        j.pop(indice)
+    print("Removido com Sucesso!")
+
+    exibir_tabela(tabela)
                 
 #Requesito 4
 def addColuna(tabela):
-    coluna = input("Digite o nome da nova coluna: ")
+    print("\n-=ADICIONANDO COLUNA=-\n")  
+    coluna = input("Digite o nome da nova coluna: ").capitalize()
+
     adicionar_coluna = input("Digite as linhas separados por (;): ").split(';')
     
+    cont_linha  = list(tabela.values())
+
+    while len(adicionar_coluna) != len(cont_linha[0]):
+        print(f"Você esta adicionando mais linhas do que colunas, temos {len(cont_linha[0])}")
+        adicionar_coluna = input("Digite as linhas separados por (;): ").split(';')
+
+    
     tabela [coluna] = adicionar_coluna
+    exibir_tabela(tabela)
         
 
 #Requesito 5
 def delColuna(tabela):
-    coluna_remove = input ("Digite o nome da coluna para remover: ")
+    print("\n-=REMOVENDO COLUNA=-\n")
+    print(f"Colunas Válidas: {[x for x in tabela.keys()]}")
+    coluna_remove = input ("Digite o nome da coluna para remover: ").capitalize()
+    print("\n")
 
     while coluna_remove not in tabela.keys():
-        print ("Invalido")
+        print ("Nome de Coluna Inválido! Tente Novamente")
+        print(f"Colunas Válidas: {[x for x in tabela.keys()]}")
         coluna_remove = input ("Digite o nome da coluna para remover: ")
 
     tabela.pop(coluna_remove)
-    
+
+    exibir_tabela(tabela)
+        
 #Requesito 6
 def sumTable(tabela):
+    print("\n-=SOMANDO OS ITENS DA TABELA=-\n")  
     soma = 0
 
     for i in tabela.values():
@@ -73,10 +104,11 @@ def sumTable(tabela):
             else:
                 soma += int(j)
 
-    return soma
+    return print(f"A soma dos itens da lista é: {soma}")
 
 #Requesito 7
 def mediaTable(tabela):
+    print("\n-=MÉDIA DOS ITEMS DA TABELA=-\n")  
     soma = 0
     cont = 0
 
@@ -89,14 +121,16 @@ def mediaTable(tabela):
                 soma += int(j)
                 cont += 1
 
-    return soma/cont
+    return print(soma/cont)
 
 #Requesito 8
 def exibir_tabela(tabela):
+    print("\n-=EXIBINDO A TABELA=-\n")  
     print(pd.DataFrame(tabela))
 
 #Requesito 9
 def openCSV():
+    print("\n-=ABRINDO ARQUIVO .CSV=-\n")
     nova_tabela = {}
     colunas = ["Nome", "Dano Corpo", "Dano Cabeça"]
 
@@ -112,9 +146,29 @@ def openCSV():
             for i in range(len(colunas)):
                 nova_tabela[colunas[i]].append(linhas[i])
 
-    return pd.DataFrame(nova_tabela)
+    exibir_tabela(nova_tabela)
+    return nova_tabela
 
 #Requesito 10
+
+def filtarTable(armaDano, primeiraLetra):
+    print("\n-=APLICANDO FILTRO=-\n")
+    print('''O que você quer filtrar:
+          
+            [1] - Dano na Cabeça
+            [2] - Primeira Letra
+          ''')
+    
+    opc = int(input("Digite a opc: "))
+    print("\n")
+    
+    if opc==1:
+        return armaDano()
+    else:
+        return primeiraLetra()
+    
+    
+#Funções Auxiliar
 
 #Filtro 1
 def armaDano():
@@ -141,18 +195,33 @@ def primeiraLetra():
                     print(i)
             break
 
-def filtarTable(armaDano, primeiraLetra):
-    print('''O que você quer filtrar:
+#Função para verificar valores str, int, float ou booleano na criação das tabelas
+def verificaItem(valor):
+    print("""
+        
+        Selecione o tipo de item desejado:
+            [1] Inteiro
+            [2] String
+            [3] Flutuante
+            [4] Booleano
           
-            [1] - Dano na Cabeça
-            [2] - Primeira Letra
-          ''')
-    
-    opc = int(input("Digite a opc: "))
-    print("\n")
-    
+          """)
+    opc = int(input("Digite a opção desejada: "))
     if opc==1:
-        return armaDano()
-    else:
-        return primeiraLetra()
+        linha = int(input("Digite as linhas separados por (;): ")).split(';')
+        while linha.type() != int:
+            print ("Tipo de item diferente do escolhido")
+            linha = int(input("Digite as linhas separados por (;): ")).split(';')
 
+    elif opc==2:
+        linha = str(input('Digite as linhas separados por (;): '))
+        while linha.type() != int:
+            print ("Tipo de item diferente do escolhido")
+            linha = int(input("Digite as linhas separados por (;): ")).split(';')
+    elif opc==3:
+        linha = float(input("Digite as linhas separados por (;): ")).split(';')
+        
+    elif opc==4:
+        linha = bool(input("Digite as linhas separados por (;): ")).split(';')
+    else:
+        print("Opção Inválida")
