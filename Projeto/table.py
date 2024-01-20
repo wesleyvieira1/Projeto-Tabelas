@@ -137,7 +137,7 @@ def openCSV():
     for coluna in colunas:
         nova_tabela[coluna] = []
 
-    with open('valorantArmas.csv', 'r') as arqCsv:
+    with open('Projeto/valorantArmas.csv', 'r') as arqCsv:
         arqCsv.readline()
 
         for linha in arqCsv:
