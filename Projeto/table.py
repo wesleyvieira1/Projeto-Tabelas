@@ -11,13 +11,11 @@ def criarTabela():
     nColunas = int(input("Número de colunas: "))
 
     for i in range (nColunas):
-        nomeColuna = input("Nome da coluna: ")
+        nomeColuna = input(f"Nome da coluna {i}: ")
         
-        linha = input("Digite as linhas separados por (;): ").split(';')
+        linha = input(f"Digite as linhas da coluna {i} separados por (;): ").split(';')
 
         tabela[nomeColuna] = linha
-
-    #global Nlinhas = len(linha)
 
     return tabela
 
@@ -25,7 +23,7 @@ def criarTabela():
 def addLinha(tabela):
     print("\n-=ADICIONANDO NOVA LINHA=-\n")  
     for key, valor in tabela.items():
-        novo_item = input(f"Digite o novo item da coluna | {key}: ")
+        novo_item = input(f"Digite o novo item da coluna | {key}: ").capitalize()
         
         while True:
             if novo_item!="":
@@ -36,7 +34,7 @@ def addLinha(tabela):
 
         valor.append(novo_item)
         
-    exibir_tabela(tabela)
+    return exibir_tabela(tabela)
 
 #Requesito 3
 def delLinha(tabela):
@@ -55,7 +53,7 @@ def delLinha(tabela):
         j.pop(indice)
     print("Removido com Sucesso!")
 
-    exibir_tabela(tabela)
+    return exibir_tabela(tabela)
                 
 #Requesito 4
 def addColuna(tabela):
@@ -70,9 +68,9 @@ def addColuna(tabela):
         print(f"Você esta adicionando mais linhas do que colunas, temos {len(cont_linha[0])}")
         adicionar_coluna = input("Digite as linhas separados por (;): ").split(';')
 
-    
     tabela [coluna] = adicionar_coluna
-    exibir_tabela(tabela)
+    
+    return exibir_tabela(tabela)
         
 
 #Requesito 5
@@ -89,7 +87,7 @@ def delColuna(tabela):
 
     tabela.pop(coluna_remove)
 
-    exibir_tabela(tabela)
+    return exibir_tabela(tabela)
         
 #Requesito 6
 def sumTable(tabela):
@@ -100,7 +98,6 @@ def sumTable(tabela):
         for j in i:
             if type(j)==str:
                 pass
-
             else:
                 soma += int(j)
 
@@ -146,11 +143,9 @@ def openCSV():
             for i in range(len(colunas)):
                 nova_tabela[colunas[i]].append(linhas[i])
 
-    exibir_tabela(nova_tabela)
-    return nova_tabela
+    return exibir_tabela(nova_tabela)
 
 #Requesito 10
-
 def filtarTable(armaDano, primeiraLetra):
     print("\n-=APLICANDO FILTRO=-\n")
     print('''O que você quer filtrar:
