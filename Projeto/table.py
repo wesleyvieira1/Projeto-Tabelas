@@ -42,9 +42,6 @@ def delLinha(tabela):
     indice = int(input("Digite o indice que quer remover: "))
     cont_linha = list(tabela.values())
 
-    #não deixar a tabela vazia
-    #item revomido/ sim ou não
-
     while (indice >= len(cont_linha[0]) or indice < 0):
         print("Erro, tamanho errado!!")
         indice = int(input("Digite o indice que quer remover: "))
@@ -100,8 +97,10 @@ def sumTable(tabela):
                 pass
             else:
                 soma += int(j)
-
-    return print(f"A soma dos itens da lista é: {soma}")
+    if soma==0:
+        return "Não possui Inteiros\n"
+    else:
+        return soma
 
 #Requesito 7
 def mediaTable(tabela):
@@ -117,8 +116,10 @@ def mediaTable(tabela):
             else:
                 soma += int(j)
                 cont += 1
-
-    return print(soma/cont)
+    if cont == 0:
+        return 'Não possui Inteiros\n'
+    else:
+        return (soma/cont)
 
 #Requesito 8
 def exibir_tabela(tabela):
@@ -189,34 +190,3 @@ def primeiraLetra():
                 if letra in i:
                     print(i)
             break
-
-#Função para verificar valores str, int, float ou booleano na criação das tabelas
-def verificaItem(valor):
-    print("""
-        
-        Selecione o tipo de item desejado:
-            [1] Inteiro
-            [2] String
-            [3] Flutuante
-            [4] Booleano
-          
-          """)
-    opc = int(input("Digite a opção desejada: "))
-    if opc==1:
-        linha = int(input("Digite as linhas separados por (;): ")).split(';')
-        while linha.type() != int:
-            print ("Tipo de item diferente do escolhido")
-            linha = int(input("Digite as linhas separados por (;): ")).split(';')
-
-    elif opc==2:
-        linha = str(input('Digite as linhas separados por (;): '))
-        while linha.type() != int:
-            print ("Tipo de item diferente do escolhido")
-            linha = int(input("Digite as linhas separados por (;): ")).split(';')
-    elif opc==3:
-        linha = float(input("Digite as linhas separados por (;): ")).split(';')
-        
-    elif opc==4:
-        linha = bool(input("Digite as linhas separados por (;): ")).split(';')
-    else:
-        print("Opção Inválida")
