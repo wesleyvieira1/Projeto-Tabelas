@@ -3,17 +3,15 @@
 
 from table import *
 
-tabela = {'Nome': ['Wesley', 'Carlos'] , 'Idade':[20,20]}
 #tabela = criarTabela()
 #exibir_tabela(tabela)
 #addLinha(tabela)
 #delLinha(tabela)
 #addColuna(tabela)
 #delColuna(tabela)
-#exibir_tabela(tabela)
-print(f"Soma: {sumTable(tabela)}")
-print(f"Média: {mediaTable(tabela)}")
-#openCSV()
+#print(f"Soma: {sumTable(tabela)}")
+#print(f"Média: {mediaTable(tabela)}")
+openCSV()
 #filtarTable(armaDano, primeiraLetra)
-#armaDano()
+armaDano()
 #primeiraLetra()
