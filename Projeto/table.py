@@ -144,7 +144,7 @@ def openCSV():
             for i in range(len(colunas)):
                 nova_tabela[colunas[i]].append(linhas[i])
 
-    return exibir_tabela(nova_tabela)
+    return nova_tabela
 
 #Requesito 10
 def filtarTable(armaDano, primeiraLetra):
@@ -171,6 +171,7 @@ def armaDano():
     valor = int(input("Digite qual dano na cabeça você quer filtrar: "))
     tab = openCSV()
     cont = 0
+    
     for i in tab["Dano Cabeça"]:
         if int(i) > valor:
             nome = tab["Nome"][cont]

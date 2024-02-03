@@ -12,6 +12,6 @@ from table import *
 #print(f"Soma: {sumTable(tabela)}")
 #print(f"Média: {mediaTable(tabela)}")
 openCSV()
-#filtarTable(armaDano, primeiraLetra)
-armaDano()
+filtarTable(armaDano, primeiraLetra)
+#armaDano()
 #primeiraLetra()
