@@ -93,10 +93,10 @@ def sumTable(tabela):
 
     for i in tabela.values():
         for j in i:
-            if type(j)==str:
-                pass
+            if j.isdigit():
+                soma+=int(j)
             else:
-                soma += int(j)
+                pass
     if soma==0:
         return "Não possui Inteiros\n"
     else:
@@ -110,12 +110,11 @@ def mediaTable(tabela):
 
     for i in tabela.values():
         for j in i:
-            if type(j)==str:
-                pass
-
-            else:
+            if j.isdigit():
                 soma += int(j)
                 cont += 1
+            else:
+                pass
     if cont == 0:
         return 'Não possui Inteiros\n'
     else:

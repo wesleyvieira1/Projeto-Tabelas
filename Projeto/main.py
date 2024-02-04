@@ -3,15 +3,13 @@
 
 from table import *
 
-#tabela = criarTabela()
-#exibir_tabela(tabela)
-#addLinha(tabela)
-#delLinha(tabela)
-#addColuna(tabela)
-#delColuna(tabela)
-#print(f"Soma: {sumTable(tabela)}")
-#print(f"Média: {mediaTable(tabela)}")
+tabela = criarTabela()
+exibir_tabela(tabela)
+addLinha(tabela)
+delLinha(tabela)
+addColuna(tabela)
+delColuna(tabela)
+print(f"Soma: {sumTable(tabela)}")
+print(f"Média: {mediaTable(tabela)}")
 openCSV()
 filtarTable(armaDano, primeiraLetra)
-#armaDano()
-#primeiraLetra()
